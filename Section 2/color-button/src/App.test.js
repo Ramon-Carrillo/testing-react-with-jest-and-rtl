@@ -19,3 +19,30 @@ test('button has correct initial color', () => {
   //* expect the button text to be 'Change to red' *//
   expect(colorButton.textContent).toBe('Change to red')
 })
+
+test('initial conditions', () => {
+  render(<App />)
+  //* check the button starts out enabled *//
+  const colorButton = screen.getByRole('button', { name: 'Change to blue' })
+  expect(colorButton).toBeEnabled()
+
+  //* check that the checkbox is unchecked *//
+  const checkbox = screen.getByRole('checkbox')
+  expect(checkbox).not.toBeChecked()
+})
+
+//* First Code Challenge *//
+test('When checkbox is checked,button should be disabled', () => {
+  render(<App />)
+  //* check the checkbox is enabled *//
+  const checkbox = screen.getByRole('checkbox')
+  const button = screen.getByRole('button')
+
+  //* check that the checkbox is disabled *//
+  fireEvent.click(checkbox)
+  expect(button).toBeDisabled()
+
+  //* check that the checkbox is enabled *//
+  fireEvent.click(checkbox)
+  expect(button).toBeEnabled()
+})
