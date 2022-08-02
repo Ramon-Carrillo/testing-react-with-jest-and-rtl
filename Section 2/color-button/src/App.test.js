@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import { text } from 'node:stream/consumers'
+import { replaceCamelWithSpaces } from './App'
 import App from './App'
 
 test('button has correct initial color', () => {
@@ -77,4 +77,16 @@ test('Click disabled button has gray background and reverts to blue', () => {
   //*Revert to blue*//
   fireEvent.click(checkbox)
   expect(button).toHaveStyle('background-color: blue')
+})
+
+describe('spaces before camel-case capital letters', () => {
+  test('Works for no inner capital letters', () => {
+    expect(replaceCamelWithSpaces('Red')).toBe('Red')
+  })
+  test('Works for inner capital letters', () => {
+    expect(replaceCamelWithSpaces('MidnightBlue')).toBe('Midnight Blue')
+  })
+  test('Works for multiple inner capital letters', () => {
+    expect(replaceCamelWithSpaces('MediumVioletRed')).toBe('Medium Violet Red')
+  })
 })
