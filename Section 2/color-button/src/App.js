@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 
 function App() {
   const [color, setColor] = useState('red')
@@ -10,7 +9,7 @@ function App() {
   return (
     <div>
       <button
-        style={{ backgroundColor: color, color: 'white' }}
+        style={{ backgroundColor: disabled ? 'gray' : color }}
         onClick={() => setColor(newColor)}
         disabled={disabled}
       >
@@ -18,11 +17,12 @@ function App() {
       </button>
       <input
         type='checkbox'
-        id='enable-button-checkbox'
+        id='disable-button-checkbox'
         disabled={disabled}
         aria-checked={disabled}
         onChange={(e) => setDisabled(e.target.checked)}
       />
+      <label htmlFor='disable-button-checkbox'>Disable button</label>
     </div>
   )
 }

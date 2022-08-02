@@ -35,8 +35,8 @@ test('initial conditions', () => {
 test('When checkbox is checked,button should be disabled', () => {
   render(<App />)
   //* check the checkbox is enabled *//
-  const checkbox = screen.getByRole('checkbox')
-  const button = screen.getByRole('button')
+  const checkbox = screen.getByRole('checkbox', { name: 'Disable button' })
+  const button = screen.getByRole('button', { name: 'Change to blue' })
 
   //* check that the checkbox is disabled *//
   fireEvent.click(checkbox)
@@ -45,4 +45,36 @@ test('When checkbox is checked,button should be disabled', () => {
   //* check that the checkbox is enabled *//
   fireEvent.click(checkbox)
   expect(button).toBeEnabled()
+})
+
+//* Second Code Challenge *//
+test('Disable button has gray background and reverts to red', () => {
+  render(<App />)
+  const checkbox = screen.getByRole('checkbox', { name: 'Disable button' })
+  const button = screen.getByRole('button', { name: 'Change to blue' })
+
+  //*Disable button*//
+  fireEvent.click(checkbox)
+  expect(button).toHaveStyle('background-color: gray')
+
+  //*Revert to red*//
+  fireEvent.click(checkbox)
+  expect(button).toHaveStyle('background-color: red')
+})
+
+test('Click disabled button has gray background and reverts to blue', () => {
+  render(<App />)
+  const checkbox = screen.getByRole('checkbox', { name: 'Disable button' })
+  const button = screen.getByRole('button', { name: 'Change to blue' })
+
+  //* Change button to blue *//
+  fireEvent.click(button)
+
+  //*Disable button*//
+  fireEvent.click(checkbox)
+  expect(button).toHaveStyle('background-color: gray')
+
+  //*Revert to blue*//
+  fireEvent.click(checkbox)
+  expect(button).toHaveStyle('background-color: blue')
 })
