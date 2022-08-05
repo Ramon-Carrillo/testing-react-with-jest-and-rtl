@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row'
 import AlertBanner from '../common/AlertBanner'
 import { pricePerItem } from '../../constants'
 import { useOrderDetails } from '../../context/OrderDetails'
+import formatPrice from '../../util'
 
 const Options = ({ optionType }) => {
   const [items, setItems] = useState([])
@@ -16,7 +17,7 @@ const Options = ({ optionType }) => {
     axios
       .get(`http://localhost:3030/${optionType}`)
       .then((res) => {
-        setItems(res.data)
+        return setItems(res.data)
       })
       .catch((err) => {
         setError(true)
@@ -46,7 +47,7 @@ const Options = ({ optionType }) => {
   return (
     <>
       <h2>{title}</h2>
-      <p>{pricePerItem[optionType]} each</p>
+      <p>{formatPrice(pricePerItem[optionType])} each</p>
       <p>
         {title} total: {orderDetails.totals[optionType]}
       </p>

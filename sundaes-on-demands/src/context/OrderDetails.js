@@ -7,14 +7,7 @@ import React, {
   useEffect,
 } from 'react'
 import { pricePerItem } from '../constants'
-
-const formatPrice = (price) => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-  }).format(price)
-}
+import formatPrice from '../util'
 
 const OrderDetails = createContext()
 
